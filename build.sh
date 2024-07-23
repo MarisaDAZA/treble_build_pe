@@ -16,7 +16,7 @@ BD=$HOME/builds
 initRepos() {
     if [ ! -d .repo ]; then
         echo "--> Initializing workspace"
-        repo init -u https://github.com/PixelExperience/manifest -b thirteen-plus
+        repo init -u https://github.com/PixelExperience/manifest -b thirteen-plus --depth=1
         echo
 
         echo "--> Preparing local manifest"
@@ -28,7 +28,7 @@ initRepos() {
 
 syncRepos() {
     echo "--> Syncing repos"
-    repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
+    repo sync -c --force-sync --optimized-fetch --no-clone-bundle --no-tags --prune -j$(nproc --all)
     echo
 }
 
@@ -55,7 +55,7 @@ applyPatches() {
 
 setupEnv() {
     echo "--> Setting up build environment"
-    source build/envsetup.sh &>/dev/null
+    source build/envsetup.sh
     mkdir -p $BD
     echo
 }
