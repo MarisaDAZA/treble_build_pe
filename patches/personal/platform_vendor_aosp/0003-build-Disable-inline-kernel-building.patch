@@ -1,7 +1,7 @@
-From f9a585a7a61eae3ec0a9e482269424668a27c8d3 Mon Sep 17 00:00:00 2001
+From 1bc94be41378e775b3dd81507e54cb4d0eb9643e Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 20 Oct 2021 15:54:26 +0100
-Subject: [PATCH 3/4] build: Disable inline kernel building
+Subject: [PATCH] build: Disable inline kernel building
 
 Change-Id: I4c01aa093474a8017366bd5e98586c58b2cd6452
 ---
@@ -10,28 +10,28 @@ Change-Id: I4c01aa093474a8017366bd5e98586c58b2cd6452
  2 files changed, 4 insertions(+)
 
 diff --git a/build/tasks/kernel.mk b/build/tasks/kernel.mk
-index 7797d8ed..bfa106dc 100644
+index dd68229..6b77834 100644
 --- a/build/tasks/kernel.mk
 +++ b/build/tasks/kernel.mk
-@@ -66,6 +66,7 @@
- #                                          modules in vendor_overlay instead of vendor
+@@ -75,6 +75,7 @@
+ #                                          final DTB image when using QCOM's merge_dtbs script.
  
  ifneq ($(TARGET_NO_KERNEL),true)
 +ifneq ($(TARGET_NO_KERNEL_OVERRIDE),true)
  
  ## Externally influenced variables
  KERNEL_SRC := $(TARGET_KERNEL_SOURCE)
-@@ -515,4 +516,5 @@ dtboimage: $(INSTALLED_DTBOIMAGE_TARGET)
+@@ -651,4 +652,5 @@ dtboimage: $(INSTALLED_DTBOIMAGE_TARGET)
  .PHONY: dtbimage
  dtbimage: $(INSTALLED_DTBIMAGE_TARGET)
  
 +endif # TARGET_NO_KERNEL_OVERRIDE
  endif # TARGET_NO_KERNEL
 diff --git a/config/common.mk b/config/common.mk
-index 134ad01e..ea459b42 100644
+index 813b243..50429db 100644
 --- a/config/common.mk
 +++ b/config/common.mk
-@@ -177,6 +177,8 @@ PRODUCT_PACKAGES += \
+@@ -187,6 +187,8 @@ endif
  PRODUCT_PRODUCT_PROPERTIES += \
      ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
  
@@ -41,5 +41,5 @@ index 134ad01e..ea459b42 100644
  TARGET_SUPPORTS_GOOGLE_RECORDER ?= true
  TARGET_INCLUDE_STOCK_ARCORE ?= true
 -- 
-2.25.1
+2.34.1
 
