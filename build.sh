@@ -91,8 +91,8 @@ buildVndkliteVariant() {
     echo "--> Building treble_arm64_bvN-vndklite"
     cd sas-creator
     sudo bash lite-adapter.sh 64 $BD/system-treble_arm64_bvN.img
-    cp s.img $BD/system-treble_arm64_bvN-vndklite.img
-    sudo rm -rf s.img d tmp
+    mv s.img $BD/system-treble_arm64_bvN-vndklite.img
+    sudo rm -rf d tmp
     cd ..
     echo
 }
