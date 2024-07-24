@@ -143,7 +143,7 @@ buildVariant
 buildSlimVariant
 buildVndkliteVariant
 generatePackages
-generateOta
+# generateOta
 
 END=$(date +%s)
 ELAPSEDM=$(($(($END-$START))/60))
